@@ -13,18 +13,14 @@ namespace credit_calculator.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult CalculateCredit()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ClearCredit()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
