@@ -10,6 +10,8 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo|Comfortaa|Fredoka+One|Righteous&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,8 +21,8 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        <div class="jumbotron block-alignment" style="height: 75vh;">
+    <div id="content" class="container body-content">
+        <div id="place" class="jumbotron block-alignment h-75">
             @RenderBody()
         </div>
         <hr />
