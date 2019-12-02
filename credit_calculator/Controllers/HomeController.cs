@@ -20,7 +20,7 @@ namespace credit_calculator.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View();
+                return View(credit);
             }
             return RedirectToAction("CalculateCredit");
         }
