@@ -3,6 +3,18 @@
     padding-bottom: 20px;
 }
 
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 315px;
+}
+
+label {
+    color: #565454;
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -16,19 +28,43 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 .block-alignment {
     margin: 0 !important;
     padding: 0 !important;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.navbar-inverse {
+    background: linear-gradient(to top right, #403a3a, #797878);
+    border-color: #312e2e;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffd800;
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px;
+}
+
+.navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: #f8eba1;
+    background-color: transparent
+}
+
+.jumbotron {
+    min-height: 400px;
+    background-color: #dbd1d1;
+    position: relative;
+}
+
+.h-75 {
+    height: 75vh !important;
+}
+
+.form-control {
+    width: 315px;
+    height: 40px;
 }
 
 .w-60 {
