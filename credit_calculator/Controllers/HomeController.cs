@@ -22,7 +22,7 @@ namespace credit_calculator.Controllers
             {
                 return View(credit);
             }
-            return RedirectToAction("CalculateCredit");
+            return View("CalculateCredit");
         }
 
         public ActionResult ClearCredit()
