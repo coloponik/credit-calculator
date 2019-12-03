@@ -18,7 +18,7 @@ namespace credit_calculator.Annotations
                 if (regex.IsMatch(str))
                 {
                     double doubval = Convert.ToDouble(value);
-                    if ((doubval >= 1) && (doubval <= 36))
+                    if ((doubval >= 1) && (doubval <= 60))
                     {
                         return true;
                     }

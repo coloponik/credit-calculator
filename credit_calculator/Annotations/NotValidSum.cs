@@ -18,7 +18,7 @@ namespace credit_calculator.Annotations
                 if (regex.IsMatch(str))
                 {
                     double doubval = Convert.ToDouble(value);
-                    if ((doubval >= 20000.00) && (doubval <= 250000.00))
+                    if ((doubval >= 20000.00) && (doubval <= 600000.00))
                     {
                         return true;
                     }

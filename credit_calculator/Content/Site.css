@@ -8,6 +8,11 @@ input,
 select,
 textarea {
     max-width: 315px;
+    margin-top: 6px;
+}
+
+#Back {
+    max-width: 150px;
 }
 
 label {
