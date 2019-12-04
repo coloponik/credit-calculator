@@ -14,7 +14,7 @@
              <pre class="prettyprint pre-scrollable">
                  @if (Model.Length > 0)
                  {
-                     <table class="table w-70">
+                     <table class="table w-60">
                          <thead class="thead-light">
                              <tr>
                                  <th scope="col">№<br>платежа</th>
@@ -35,10 +35,10 @@
                                      <td>@pay.MainBalance</td>
                                  </tr>
                              }
-                             <table class="table w-70">
+                             <table class="table w-60">
                                  <tbody class="thead-light">
                                      <tr>
-                                         <th scope="col">Итого переплата по кредиту, руб.:                                                @ViewData["totalOverpay"]</th>
+                                         <th scope="col">Итого переплата по кредиту, руб.:                                @ViewData["totalOverpay"]</th>
                                      </tr>
                                  </tbody>
                              </table>
@@ -47,7 +47,7 @@
                  }
              </pre>
              <div class="col">
-                 <p><input type="submit" class="btn btn-default btn-warning" value="Экспорт расчётов в .csv"></p>
+                 <p><input type="submit" class="btn btn-default btn-warning btn-right" value="Экспорт расчётов в .csv"></p>
              </div>
          </div>
      </div>
