@@ -14,7 +14,7 @@ textarea {
 label {
     color: #565454;
     font-family: 'Comfortaa', cursive;
-    font-size: 17px;
+    font-size: 12px;
 }
 
 .block-alignment {
@@ -42,9 +42,13 @@ label {
     white-space: normal;
 }
 
+.form{
+    max-height: 40vh;
+}
+
 .form-control {
     width: 326px;
-    height: 40px;
+    height: 30px;
 }
 
 .h-70 {
@@ -53,7 +57,7 @@ label {
 
 .jumbotron {
     min-width: 1100px;
-    min-height: 480px;
+    min-height: 550px;
     background-color: #dbd1d1;
     position: relative;
 }
@@ -85,6 +89,10 @@ label {
     margin-top: 10px;
     max-height: 345px;
     overflow-y: scroll;
+}
+
+.active {
+    display:none;
 }
 
 .w-60 {

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using credit_calculator.Models;
 
 namespace credit_calculator.Controllers
@@ -20,18 +23,13 @@ namespace credit_calculator.Controllers
         {
             if (ModelState.IsValid)
             {
-                Payment[] payments = PaymentScheduleCalculation(credit);
+                Payment[] payments = PaymentScheduleForYearRate(credit);
                 return View(payments);
             }
             return View("CalculateCredit");
         }
 
-        public ActionResult ClearCredit()
-        {
-            return View("CalculateCredit");
-        }
-
-        private Payment[] PaymentScheduleCalculation(Credit data)
+        private Payment[] PaymentScheduleForYearRate(Credit data)
         {
             double ratePerMonth = data.RatePerYear / 100 / 12;
             double payPerMonth = data.CreditAmount * (ratePerMonth / (1 - Math.Pow(1 + ratePerMonth, -data.CreditPeriod)));
@@ -46,12 +44,13 @@ namespace credit_calculator.Controllers
                 pay[i] = new Payment();
                 double percent = creditAmountCopy * (data.RatePerYear / 100) / 12;
                 creditAmountCopy -= payPerMonth - percent;
+                DateTime today = DateTime.Today;
                 //-------------------------------------------------------------------------------------
-                pay[i].Id = i + 1;                     //№ платежа
-                pay[i].Date = Math.Round(payPerMonth, 2);             //дата платежа
-                pay[i].Body = Math.Round(payPerMonth - percent, 2);   //размер платежа по телу
-                pay[i].Percent = Math.Round(percent, 2);              //размер платежа по %
-                pay[i].MainBalance = Math.Round(creditAmountCopy, 2); //остаток основного долга
+                pay[i].Id = i + 1;                                               //№ платежа
+                pay[i].Date = today.AddMonths(i).ToString("dd/MM/yyyy");         //дата платежа
+                pay[i].Body = Math.Round(payPerMonth - percent, 2);              //размер платежа по телу
+                pay[i].Percent = Math.Round(percent, 2);                         //размер платежа по %
+                pay[i].MainBalance = Math.Round(creditAmountCopy, 2);            //остаток основного долга
                 totalCreditAmountCopy -= Math.Round(payPerMonth, 2);
                 totalPlus = pay[i].MainBalance;
                 //-------------------------------------------------------------------------------------

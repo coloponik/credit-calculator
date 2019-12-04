@@ -7,16 +7,19 @@ using System.Web;
 
 namespace credit_calculator.Annotations
 {
-    public class NotValidSum : ValidationAttribute
+    public class NotValidStep : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
-            if (value != null) {
-                Regex regex = new Regex(@"\d+([.]\d{1,2})?");
+            if (value != null)
+            {
+                Regex regex = new Regex(@"\d+");
                 string str = value.ToString();
-                if (regex.IsMatch(str)) {
+                if (regex.IsMatch(str))
+                {
                     double doubval = Convert.ToDouble(value);
-                    if ((doubval >= 20000.00) && (doubval <= 600000.00)) {
+                    if ((doubval >= 1) && (doubval <= 30))
+                    {
                         return true;
                     }
                 }

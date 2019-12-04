@@ -55,6 +55,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -118,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\NotValidRate.cs" />
+    <Compile Include="Annotations\NotValidStep.cs" />
     <Compile Include="Annotations\NotValidSum.cs" />
     <Compile Include="Annotations\NotValidTerm.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

@@ -11,15 +11,12 @@ namespace credit_calculator.Annotations
     {
         public override bool IsValid(object value)
         {
-            if (value != null)
-            {
+            if (value != null) {
                 Regex regex = new Regex(@"\d+([.]\d{1,2})?");
                 string str = value.ToString();
-                if (regex.IsMatch(str))
-                {
+                if (regex.IsMatch(str)) {
                     double doubval = Convert.ToDouble(value);
-                    if ((doubval >= 10.00) && (doubval <= 25.00))
-                    {
+                    if ((doubval >= 10.00) && (doubval <= 25.00)) {
                         return true;
                     }
                 }
