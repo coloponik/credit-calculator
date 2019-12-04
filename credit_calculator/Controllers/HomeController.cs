@@ -48,15 +48,15 @@ namespace credit_calculator.Controllers
                 creditAmountCopy -= payPerMonth - percent;
                 //-------------------------------------------------------------------------------------
                 pay[i].Id = i + 1;                     //№ платежа
-                pay[i].Date = payPerMonth;             //дата платежа
-                pay[i].Body = payPerMonth - percent;   //размер платежа по телу
-                pay[i].Percent = percent;              //размер платежа по %
-                pay[i].MainBalance = creditAmountCopy; //остаток основного долга
-                totalCreditAmountCopy -= payPerMonth;
+                pay[i].Date = Math.Round(payPerMonth, 2);             //дата платежа
+                pay[i].Body = Math.Round(payPerMonth - percent, 2);   //размер платежа по телу
+                pay[i].Percent = Math.Round(percent, 2);              //размер платежа по %
+                pay[i].MainBalance = Math.Round(creditAmountCopy, 2); //остаток основного долга
+                totalCreditAmountCopy -= Math.Round(payPerMonth, 2);
                 totalPlus = pay[i].MainBalance;
                 //-------------------------------------------------------------------------------------
             }
-            double totalOverpay = totalCreditAmount - data.CreditAmount + totalPlus;
+            double totalOverpay = Math.Round(totalCreditAmount - data.CreditAmount + totalPlus, 2);
             ViewData["totalOverpay"] = totalOverpay;
             return pay;
         }

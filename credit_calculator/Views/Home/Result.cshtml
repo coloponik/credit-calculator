@@ -11,18 +11,17 @@
              <div class="col block-alignment">
                   @Html.Label("ГРАФИК ПЛАТЕЖЕЙ", new { htmlAttributes = new { @class = "block-alignment" } })
              </div>
-             <hr />
-             <div class="table-responsive">
+             <pre class="prettyprint pre-scrollable">
                  @if (Model.Length > 0)
                  {
-                     <table class="table w-60">
+                     <table class="table w-70">
                          <thead class="thead-light">
                              <tr>
-                                 <th scope="col">№ платежа</th>
-                                 <th scope="col">Дата платежа</th>
-                                 <th scope="col">Размер платежа по телу, руб.</th>
-                                 <th scope="col">Размер платежа по %, руб.</th>
-                                 <th scope="col">Остаток основного долга, руб.</th>
+                                 <th scope="col">№<br>платежа</th>
+                                 <th scope="col">Дата<br>платежа</th>
+                                 <th scope="col">Размер платежа<br>по телу, руб.</th>
+                                 <th scope="col">Размер платежа<br>по %, руб.</th>
+                                 <th scope="col">Остаток основного<br>долга, руб.</th>
                              </tr>
                          </thead>
                          <tbody>
@@ -36,21 +35,19 @@
                                      <td>@pay.MainBalance</td>
                                  </tr>
                              }
+                             <table class="table w-70">
+                                 <tbody class="thead-light">
+                                     <tr>
+                                         <th scope="col">Итого переплата по кредиту, руб.:                                                @ViewData["totalOverpay"]</th>
+                                     </tr>
+                                 </tbody>
+                             </table>
                          </tbody>
                      </table>
                  }
-             </div>
-             <hr/>
-             <table class="table w-60">
-                 <thead class="thead-light">
-                     <tr>
-                         <th scope="col">Итого переплата по кредиту, руб.:</th>
-                         <th scope="col">@ViewData["totalOverpay"]</th>
-                     </tr>
-                 </thead>
-             </table>
+             </pre>
              <div class="col">
-                 <p><input id="Back" type="submit" class="btn btn-default btn-warning btn-lg col-lg-10" value="Назад"></p>
+                 <p><input type="submit" class="btn btn-default btn-warning" value="Экспорт расчётов в .csv"></p>
              </div>
          </div>
      </div>

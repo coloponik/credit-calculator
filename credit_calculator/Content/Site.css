@@ -7,19 +7,20 @@
 input,
 select,
 textarea {
-    max-width: 315px;
     margin-top: 6px;
-}
-
-#Back {
-    max-width: 150px;
+    max-width: 326px;
 }
 
 label {
     color: #565454;
     font-family: 'Comfortaa', cursive;
-    font-size: 16px;
+    font-size: 17px;
 }
+
+/*table{
+    text-align: center;
+}*/
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -58,20 +59,34 @@ label {
 }
 
 .jumbotron {
-    min-height: 400px;
+    min-width: 1100px;
+    min-height: 480px;
     background-color: #dbd1d1;
     position: relative;
 }
 
-.h-75 {
-    height: 75vh !important;
+.h-70 {
+    height: 70vh !important;
 }
 
 .form-control {
-    width: 315px;
+    width: 326px;
     height: 40px;
 }
 
-.w-60 {
-    width: 60vw;
+.w-70 {
+    width: 70vw;
+}
+
+.prettyprint {
+    color: #565454;
+    background-color: #fef4be;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.4rem;
+}
+
+.pre-scrollable {
+    margin-top: 10px;
+    max-height: 335px;
+    overflow-y: scroll;
 }

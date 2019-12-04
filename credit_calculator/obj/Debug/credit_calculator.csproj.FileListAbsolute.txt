@@ -76,7 +76,7 @@ C:\Users\Админ\source\repos\credit_calculator\credit_calculator\bin\ru\Syst
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\bin\ru\System.Web.WebPages.resources.dll
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\bin\ru\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\bin\ru\System.Web.WebPages.Razor.resources.dll
-C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.csprojAssemblyReference.cache
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.csproj.CopyComplete
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.dll
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.pdb
+C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.csprojAssemblyReference.cache
