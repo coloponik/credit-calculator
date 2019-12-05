@@ -30,13 +30,16 @@
                                  <tr>
                                      <th scope="row">@pay.Id</th>
                                      <td>@pay.Date</td>
-                                     <td>@pay.Body</td>
-                                     <td>@pay.Percent</td>
-                                     <td>@pay.MainBalance</td>
+                                     <td>@pay.Body.ToString("0.00")</td>
+                                     <td>@pay.Percent.ToString("0.00")</td>
+                                     <td>@pay.MainBalance.ToString("0.00")</td>
                                  </tr>
                              }
                              <table class="table w-60">
                                  <tbody class="thead-light">
+                                     <tr>
+                                         <th scope="col">Сумма периодического платежа, руб.:                              @ViewData["payPer"]</th>
+                                     </tr>
                                      <tr>
                                          <th scope="col">Итого переплата по кредиту, руб.:                                @ViewData["totalOverpay"]</th>
                                      </tr>

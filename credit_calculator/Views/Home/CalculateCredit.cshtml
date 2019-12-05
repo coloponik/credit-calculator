@@ -8,38 +8,47 @@
 {
 
     @Html.AntiForgeryToken()
-
     <form id="creditData" class="block-alignment">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group block-alignment">
             @Html.Label("РАСЧЁТ АННУИТЕТНОГО ПЛАТЕЖА", new { htmlAttributes = new { @class = "block-alignment" } })
         </div>
         <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreditAmount)
-            @Html.EditorFor(model => model.CreditAmount, new { htmlAttributes = new { @class = "form-control focus", @autofocus = "autofocus", @placeholder = "Введите сумму кредита" } })
-            @Html.ValidationMessageFor(model => model.CreditAmount, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CreditAmount)
+                @Html.EditorFor(model => model.CreditAmount, new { htmlAttributes = new { @class = "form-control focus", @autofocus = "autofocus", @placeholder = "Введите сумму кредита" } })
+                @Html.ValidationMessageFor(model => model.CreditAmount, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CreditRate)
+                @Html.EditorFor(model => model.CreditRate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите процентную ставку" } })
+                @Html.ValidationMessageFor(model => model.CreditRate, "", new { @class = "text-danger" })
+                <div class="rad">
+                    <input id="rateYear" name="rate" type="radio" checked="checked" />
+                    <span>в год&nbsp;</span>
+                    <input id="rateDay" name="rate" type="radio" />
+                    <span>в день</span> <br />
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.RatePerYear)
-            <input id="rateYear" name="rate" type="radio" checked="checked"/>
-            <span>в год</span>
-            <input id="rateDay" name="rate" type="radio"/>
-            <span>в день</span> <br />
-            @Html.EditorFor(model => model.RatePerYear, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите процентную ставку" } })
-            @Html.ValidationMessageFor(model => model.RatePerYear, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CreditPeriod)
+                @Html.EditorFor(model => model.CreditPeriod, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите срок кредита" } })
+                @Html.ValidationMessageFor(model => model.CreditPeriod, "", new { @class = "text-danger" })
+            </div>
+            <div id="hide" class="form-group col-md-6 active">
+                @Html.LabelFor(model => model.PaymentStep)
+                @Html.EditorFor(model => model.PaymentStep, new { htmlAttributes = new { @id = "payStep", @class = "form-control", @Value = "1", @placeholder = "Введите шаг платежа" } })
+                @Html.ValidationMessageFor(model => model.PaymentStep, "", new { @class = "text-danger" })
+            </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreditPeriod)
-            @Html.EditorFor(model => model.CreditPeriod, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите срок кредита" } })
-            @Html.ValidationMessageFor(model => model.CreditPeriod, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group col-md-6 btn-float">
+                <input type="submit" class="btn btn-default btn-style btn-warning " value="Рассчитать">
+            </div>
         </div>
-        <div id="hide" class="form-group active">
-            @Html.LabelFor(model => model.PaymentStep)
-            @Html.EditorFor(model => model.PaymentStep, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите шаг платежа" } })
-            @Html.ValidationMessageFor(model => model.PaymentStep, "", new { @class = "text-danger" })
-        </div>
-        <p><input type="submit" class="btn btn-default btn-warning btn-lg col-lg-12" value="Рассчитать"></p>
     </form>
 }
 
@@ -48,21 +57,18 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('input[name = "rate"]').click(function () {
-                //if ($('input[id = "rateDay"]').click) {
-                //    $('div[id = "hide"]').show("slow");
-                //}
-                //$('input[id = "rateYear"]').click(function () {
-                //    $('div[id = "hide"]').hide("slow");
-                //});
                 if ($('input[id = "rateDay"]').prop('checked')) {
                     $('div[id = "hide"]').show("slow");
+                    $('input[id = "payStep"]').val("");
+                    ViewData["isChecked"] = true;
                 }
                 if (!$('input[id = "rateDay"]').prop('checked')) {
-                    $('div[id = "hide"]').hide("slow");
+                    $('div[id = "hide"]').hide(300);
+                    $('input[id = "payStep"]').val("1");
+                    ViewData["isChecked"] = false;
                 }
-                //$('div[id = "hide"]').toggle("slow");
             })
         });
     </script>
