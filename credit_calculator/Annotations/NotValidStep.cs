@@ -5,20 +5,25 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace credit_calculator.Annotations
+namespace credit_calculator.Annotations 
 {
-    public class NotValidStep : ValidationAttribute
+
+    public class NotValidStep : ValidationAttribute 
     {
-        public override bool IsValid(object value)
+
+        public override bool IsValid(object value) 
         {
-            if (value != null)
+
+            if (value != null) 
             {
+
                 Regex regex = new Regex(@"\d+");
                 string str = value.ToString();
-                if (regex.IsMatch(str))
+                
+                if (regex.IsMatch(str)) 
                 {
                     double doubval = Convert.ToDouble(value);
-                    if ((doubval >= 1) && (doubval <= 30))
+                    if ((doubval >= 1) && (doubval <= 30)) 
                     {
                         return true;
                     }

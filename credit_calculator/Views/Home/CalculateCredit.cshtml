@@ -9,7 +9,6 @@
 
     @Html.AntiForgeryToken()
     <form id="creditData" class="block-alignment">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group block-alignment">
             @Html.Label("РАСЧЁТ АННУИТЕТНОГО ПЛАТЕЖА", new { htmlAttributes = new { @class = "block-alignment" } })
         </div>
@@ -25,16 +24,15 @@
                 @Html.EditorFor(model => model.CreditRate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите процентную ставку" } })
                 @Html.ValidationMessageFor(model => model.CreditRate, "", new { @class = "text-danger" })
                 <div class="rad">
-                    @Html.RadioButton("rate", "в год", true, new { @id = "rateYear" })
+                    @Html.RadioButton("rate", "в год", false, new { @id = "rateYear" })
                     <span>в год&nbsp;</span>
                     @Html.RadioButton("rate", "в день", false, new { @id = "rateDay" })
-                    <span>в день</span><br/>
+                    <span>в день</span><br />
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                @*@Html.LabelFor(model => model.CreditPeriod)*@
                 <div id="termMonths">
                     @Html.Label("CreditTerm", "Срок кредита (в месяцах):")
                 </div>
@@ -43,41 +41,45 @@
                 </div>
                 @Html.EditorFor(model => model.CreditPeriod, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите срок кредита" } })
                 @Html.ValidationMessageFor(model => model.CreditPeriod, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("Credit", new { @class = "text-danger" })
             </div>
             <div id="hide" name="step" class="form-group col-md-6 active">
                 @Html.LabelFor(model => model.PaymentStep)
-                @Html.EditorFor(model => model.PaymentStep, new { htmlAttributes = new { @id = "payStep", @class = "form-control", @Value = "1", @placeholder = "Введите шаг платежа" } })
+                @Html.EditorFor(model => model.PaymentStep, new { htmlAttributes = new { @id = "payStep", @name = "payStep", @class = "form-control", @Value = "", @placeholder = "Введите шаг платежа" } })
                 @Html.ValidationMessageFor(model => model.PaymentStep, "", new { @class = "text-danger" })
             </div>
         </div>
-            <div class="form-row">
-                <div class="form-group col-md-6 btn-float">
-                    <input type="submit" class="btn btn-default btn-style btn-warning " value="Рассчитать">
-                </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 btn-float">
+                <input name="button" type="submit" class="btn btn-default btn-style btn-warning " value="Рассчитать">
             </div>
+        </div>
     </form>
 }
 
-
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-            <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    $('input[name = "rate"]').click(function () {
-                        if ($('input[id = "rateDay"]').prop('checked')) {
-                            $('div[id = "hide"]').show("slow");
-                            $('input[id = "payStep"]').val("");
-                            $('div[id = "termMonths"]').hide();
-                            $('div[id = "termDays"]').show();
-                        }
-                        if (!$('input[id = "rateDay"]').prop('checked')) {
-                            $('div[id = "hide"]').hide(300);
-                            $('input[id = "payStep"]').val("1");
-                            $('div[id = "termDays"]').hide();
-                            $('div[id = "termMonths"]').show();
-                        }
-                    })
-                });
-            </script>
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function ()
+        {
+            $('input[name = "rate"]').click(function ()
+            {
+                if ($('input[id = "rateDay"]').prop('checked'))
+                {
+                    $('div[id = "hide"]').show("slow");
+                    $('input[id = "payStep"]').val("");
+                    $('div[id = "termMonths"]').hide();
+                    $('div[id = "termDays"]').show();
+                }
+                if (!$('input[id = "rateDay"]').prop('checked'))
+                {
+                    $('div[id = "hide"]').hide(300);
+                    $('input[id = "payStep"]').val("1");
+                    $('div[id = "termDays"]').hide();
+                    $('div[id = "termMonths"]').show();
+                }
+            })
+        });
+    </script>
+}

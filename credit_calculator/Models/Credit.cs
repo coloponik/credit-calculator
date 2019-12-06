@@ -48,26 +48,26 @@ namespace credit_calculator.Models
             double totalPlus = 0;
             DateTime today = DateTime.Today;
 
-            for (int i = 0; i < period; ++i)
+            for (int i = 0; i < period; ++i) 
             {
                 rezPay[i] = new Payment();
                 double percent = creditAmountCopy * (CreditRate / 100);
-                if (type)
+                if (type) 
                 {
                     percent = percent / 12;
                 }
-                if (!type)
+                if (!type) 
                 {
                     percent = percent * PaymentStep;
                 }
                 creditAmountCopy -= payPerPeriod - percent;
                 //-------------------------------------------------------------------------------------
                 rezPay[i].Id = i + 1;                                                               //№ платежа
-                if (type)
+                if (type) 
                 {
                     rezPay[i].Date = today.AddMonths(i).ToString("dd/MM/yyyy");                     //дата платежа
                 }
-                if (!type)
+                if (!type) 
                 {
                     rezPay[i].Date = today.AddDays(PaymentStep * i).ToString("dd/MM/yyyy");         //дата платежа
                 }

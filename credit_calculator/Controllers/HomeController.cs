@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using credit_calculator.Models;
 using Newtonsoft.Json;
 
-namespace credit_calculator.Controllers
+namespace credit_calculator.Controllers 
 {
-    public class HomeController : Controller
+
+    public class HomeController : Controller 
     {
 
-        public ActionResult CalculateCredit()
+        public ActionResult CalculateCredit() 
         {
             return View();
         }
@@ -23,6 +24,15 @@ namespace credit_calculator.Controllers
         [HttpPost]
         public ActionResult Result(Credit credit, string rate) 
         {
+
+            if ((rate == "в день") && (credit.CreditPeriod % credit.PaymentStep != 0))
+            {
+                ModelState.AddModelError("Credit", "Срок кредита должен быть кратен шагу платежа");
+            }
+            if ((rate == "в день") && (credit.CreditPeriod % credit.PaymentStep != 0) && (credit.PaymentStep == 1))
+            {
+                ModelState.AddModelError("Credit", "Введите шаг платежа");
+            }
 
             if (ModelState.IsValid) 
             {
@@ -32,7 +42,7 @@ namespace credit_calculator.Controllers
                 {
                     payments = PaymentScheduleForDayRate(credit);
                 }
-                else
+                else 
                 {
                     payments = PaymentScheduleForYearRate(credit);
                 }
@@ -42,7 +52,7 @@ namespace credit_calculator.Controllers
             return View("CalculateCredit");
         }
 
-        private Payment[] PaymentScheduleForYearRate(Credit data)
+        private Payment[] PaymentScheduleForYearRate(Credit data) 
         {
             double thisPeriod = data.CreditPeriod;
             double ratePerMonth = data.CreditRate / 100 / 12;
@@ -56,7 +66,7 @@ namespace credit_calculator.Controllers
             return pay;
         }
 
-        private Payment[] PaymentScheduleForDayRate(Credit data)
+        private Payment[] PaymentScheduleForDayRate(Credit data) 
         {
             double thisPeriod = data.CreditPeriod / data.PaymentStep;
             double ratePerStep = data.CreditRate / 100 * data.PaymentStep;

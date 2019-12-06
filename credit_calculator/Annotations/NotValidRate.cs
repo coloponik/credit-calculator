@@ -5,16 +5,21 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace credit_calculator.Annotations
+namespace credit_calculator.Annotations 
 {
-    public class NotValidRate : ValidationAttribute
+
+    public class NotValidRate : ValidationAttribute 
     {
-        public override bool IsValid(object value)
+
+        public override bool IsValid(object value) 
         {
+
             if (value != null) 
             {
+
                 Regex regex = new Regex(@"\d+([.]\d{1,2})?");
                 string str = value.ToString();
+
                 if (regex.IsMatch(str)) 
                 {
                     double doubval = Convert.ToDouble(value);

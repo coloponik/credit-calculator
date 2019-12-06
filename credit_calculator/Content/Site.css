@@ -21,6 +21,10 @@ label {
     font-size: 15px;
 }
 
+th {
+    vertical-align: top;
+}
+
 .active {
     display: none;
 }
