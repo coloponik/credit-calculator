@@ -37,15 +37,19 @@ th {
     justify-content: center;
 }
 
+.btn-export {
+    float: right;
+}
+
+.btn-calc {
+    margin-top: 26px;
+    float: right;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
-
-.btn-float {
-    margin-top: 26px;
-    float: right;
 }
 
 .btn-style {
