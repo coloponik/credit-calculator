@@ -4,8 +4,6 @@
     ViewBag.Title = "Result Page";
 }
 
-@using (Html.BeginForm("Result", "Home"))
-{
      <div class="container block-alignment">
          <div class="row">
              <div class="col block-alignment">
@@ -14,41 +12,46 @@
              <pre class="prettyprint pre-scrollable">
                  @if (Model.Length > 0)
                  {
-                     <table class="table w-60">
-                         <thead class="thead-light">
-                             <tr>
-                                 <th scope="col">№<br>платежа</th>
-                                 <th scope="col">Дата<br>платежа</th>
-                                 <th scope="col">Размер платежа<br>по телу, руб.</th>
-                                 <th scope="col">Размер платежа<br>по %, руб.</th>
-                                 <th scope="col">Остаток основного<br>долга, руб.</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             @foreach (credit_calculator.Models.Payment pay in Model)
-                             {
-                                 <tr>
-                                     <th scope="row">@pay.Id</th>
-                                     <td>@pay.Date</td>
-                                     <td>@pay.Body</td>
-                                     <td>@pay.Percent</td>
-                                     <td>@pay.MainBalance</td>
-                                 </tr>
-                             }
-                             <table class="table w-60">
-                                 <tbody class="thead-light">
-                                     <tr>
-                                         <th scope="col">Итого переплата по кредиту, руб.:                                @ViewData["totalOverpay"]</th>
-                                     </tr>
-                                 </tbody>
-                             </table>
-                         </tbody>
-                     </table>
-                 }
+                     <div id="tab">
+                      <table id="rez" class="table w-60">
+                           <thead class="thead-light">
+                               <tr>
+                                   <th scope="col">№<br>платежа</th>
+                                   <th scope="col">Дата<br>платежа</th>
+                                   <th scope="col">Размер платежа<br>по телу, руб.</th>
+                                   <th scope="col">Размер платежа<br>по %, руб.</th>
+                                   <th scope="col">Остаток основного<br>долга, руб.</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               @foreach (credit_calculator.Models.Payment pay in Model)
+                               {
+                                    <tr>
+                                        <th scope="row">@pay.Id</th>
+                                        <td>@pay.Date</td>
+                                        <td>@pay.Body.ToString("0.00")</td>
+                                        <td>@pay.Percent.ToString("0.00")</td>
+                                        <td>@pay.MainBalance.ToString("0.00")</td>
+                                    </tr>
+                               }
+                                <table class="table w-60">
+                                    <tbody class="thead-light">
+                                        <tr>
+                                            <th scope="col">Сумма периодического платежа, руб.:</th>
+                                            <th scope="col">@ViewData["payPer"]</th>
+                                            <th>                                                    </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Итого переплата по кредиту, руб.:</th>
+                                            <th scope="col">@ViewData["totalOverpay"]</th>
+                                            <th>                                                    </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                           </tbody>
+                      </table>
+                    </div>
+                  }
              </pre>
-             <div class="col">
-                 <p><input type="submit" class="btn btn-default btn-warning btn-right" value="Экспорт расчётов в .csv"></p>
-             </div>
          </div>
      </div>
-}

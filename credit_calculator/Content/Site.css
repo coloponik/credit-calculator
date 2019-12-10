@@ -3,6 +3,10 @@
     padding-bottom: 20px;
 }
 
+form {
+    min-width: 600px !important;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -14,7 +18,15 @@ textarea {
 label {
     color: #565454;
     font-family: 'Comfortaa', cursive;
-    font-size: 17px;
+    font-size: 15px;
+}
+
+th {
+    vertical-align: top;
+}
+
+.active {
+    display: none;
 }
 
 .block-alignment {
@@ -25,14 +37,24 @@ label {
     justify-content: center;
 }
 
+.btn-export {
+    float: right;
+}
+
+.btn-calc {
+    margin-top: 26px;
+    float: right;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.btn-right {
-    float: right;
+.btn-style {
+    min-width: 300px;
+    height: 39px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -43,7 +65,7 @@ label {
 }
 
 .form-control {
-    width: 326px;
+    width: 300px;
     height: 40px;
 }
 
@@ -53,7 +75,7 @@ label {
 
 .jumbotron {
     min-width: 1100px;
-    min-height: 480px;
+    min-height: 470px;
     background-color: #dbd1d1;
     position: relative;
 }
@@ -74,6 +96,12 @@ label {
     background-color: transparent
 }
 
+.pre-scrollable {
+    margin-top: 10px;
+    max-height: 345px;
+    overflow-y: scroll;
+}
+
 .prettyprint {
     color: #565454;
     background-color: #fef4be;
@@ -81,12 +109,11 @@ label {
     font-size: 1.4rem;
 }
 
-.pre-scrollable {
-    margin-top: 10px;
-    max-height: 345px;
-    overflow-y: scroll;
+.rad {
+    margin-top: 5px;
+    float: right;
 }
 
 .w-60 {
-    width: 60vw;
+    width: 60vw !important;
 }

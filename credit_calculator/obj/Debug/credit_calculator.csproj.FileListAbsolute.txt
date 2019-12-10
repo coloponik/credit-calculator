@@ -80,3 +80,4 @@ C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\c
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.dll
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.pdb
 C:\Users\Админ\source\repos\credit_calculator\credit_calculator\obj\Debug\credit_calculator.csprojAssemblyReference.cache
+C:\Users\Админ\source\repos\credit_calculator\credit_calculator\bin\Calabonga.Xml.Exports.dll

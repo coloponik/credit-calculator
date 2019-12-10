@@ -1,63 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using credit_calculator.Models;
+using Newtonsoft.Json;
+using Calabonga.Xml.Exports;
 
-namespace credit_calculator.Controllers
+namespace credit_calculator.Controllers 
 {
-    public class HomeController : Controller
-    {
 
-        public ActionResult CalculateCredit()
+    public class HomeController : Controller 
+    {
+        public ActionResult CalculateCredit() 
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Result(Credit credit)
+        public ActionResult Result(Credit credit, string rate) 
         {
-            if (ModelState.IsValid)
+
+            if ((rate == "в день") && (credit.CreditPeriod % credit.PaymentStep != 0))
             {
-                Payment[] payments = PaymentScheduleCalculation(credit);
+                ModelState.AddModelError("Credit", "Срок кредита должен быть кратен шагу платежа");
+            }
+            if ((rate == "в день") && (credit.CreditPeriod % credit.PaymentStep != 0) && (credit.PaymentStep == 1))
+            {
+                ModelState.AddModelError("Credit", "Введите шаг платежа");
+            }
+
+            if (ModelState.IsValid) 
+            {
+                Payment[] payments;
+
+                if (rate == "в день") 
+                {
+                    payments = PaymentScheduleForDayRate(credit);
+                }
+                else 
+                {
+                    payments = PaymentScheduleForYearRate(credit);
+                }
+
                 return View(payments);
             }
             return View("CalculateCredit");
         }
 
-        public ActionResult ClearCredit()
+        private Payment[] PaymentScheduleForYearRate(Credit data) 
         {
-            return View("CalculateCredit");
-        }
-
-        private Payment[] PaymentScheduleCalculation(Credit data)
-        {
-            double ratePerMonth = data.RatePerYear / 100 / 12;
+            double thisPeriod = data.CreditPeriod;
+            double ratePerMonth = data.CreditRate / 100 / 12;
             double payPerMonth = data.CreditAmount * (ratePerMonth / (1 - Math.Pow(1 + ratePerMonth, -data.CreditPeriod)));
             double totalCreditAmount = payPerMonth * data.CreditPeriod;
 
-            double creditAmountCopy = data.CreditAmount;
-            double totalCreditAmountCopy = totalCreditAmount;
-            double totalPlus = 0;
-            Payment[] pay = new Payment[(int)data.CreditPeriod];
-            for (int i = 0; i < data.CreditPeriod; ++i)
-            {
-                pay[i] = new Payment();
-                double percent = creditAmountCopy * (data.RatePerYear / 100) / 12;
-                creditAmountCopy -= payPerMonth - percent;
-                //-------------------------------------------------------------------------------------
-                pay[i].Id = i + 1;                     //№ платежа
-                pay[i].Date = Math.Round(payPerMonth, 2);             //дата платежа
-                pay[i].Body = Math.Round(payPerMonth - percent, 2);   //размер платежа по телу
-                pay[i].Percent = Math.Round(percent, 2);              //размер платежа по %
-                pay[i].MainBalance = Math.Round(creditAmountCopy, 2); //остаток основного долга
-                totalCreditAmountCopy -= Math.Round(payPerMonth, 2);
-                totalPlus = pay[i].MainBalance;
-                //-------------------------------------------------------------------------------------
-            }
-            double totalOverpay = Math.Round(totalCreditAmount - data.CreditAmount + totalPlus, 2);
-            ViewData["totalOverpay"] = totalOverpay;
+            Payment[] pay = data.Initialization(thisPeriod, payPerMonth, totalCreditAmount, true);
+
+            ViewData["payPer"] = payPerMonth.ToString("0.00");
+            ViewData["totalOverpay"] = pay[0].TotalOverPay.ToString("0.00");
+            return pay;
+        }
+
+        private Payment[] PaymentScheduleForDayRate(Credit data) 
+        {
+            double thisPeriod = data.CreditPeriod / data.PaymentStep;
+            double ratePerStep = data.CreditRate / 100 * data.PaymentStep;
+            double payPerStep = data.CreditAmount * ((ratePerStep * Math.Pow((1 + ratePerStep),(data.CreditPeriod/data.PaymentStep)))/ (Math.Pow((1 + ratePerStep), (data.CreditPeriod / data.PaymentStep)) - 1));
+            double totalCreditAmount = payPerStep * data.CreditPeriod / data.PaymentStep;
+
+            Payment[] pay = data.Initialization(thisPeriod, payPerStep, totalCreditAmount, false);
+
+            ViewData["payPer"] = payPerStep.ToString("0.00");
+            ViewData["totalOverpay"] = pay[0].TotalOverPay.ToString("0.00");
             return pay;
         }
     }
